@@ -1,0 +1,3 @@
+Photos/*
+!Photos/selected/
+!Photos/selected/**
