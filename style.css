@@ -3,6 +3,17 @@
   --muted: #666;
   --rule: #ececec;
   --bg: #ffffff;
+  --code-bg: #fafafa;
+  --photo-ph: #f4f4f4;
+}
+
+:root[data-theme="dark"] {
+  --text: #e6e6e6;
+  --muted: #8a8a8a;
+  --rule: #2a2a2a;
+  --bg: #121212;
+  --code-bg: #1a1a1a;
+  --photo-ph: #222;
 }
 
 * { box-sizing: border-box; }
@@ -58,6 +69,20 @@ nav.top a:hover,
 nav.top a.active {
   color: var(--text);
 }
+
+nav.top .theme-toggle {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 1rem;
+  padding: 0;
+  margin-left: 1.25rem;
+  line-height: 1;
+}
+
+nav.top .theme-toggle:hover { color: var(--text); }
 
 h1 {
   font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
@@ -224,7 +249,7 @@ a:hover { text-decoration-color: var(--text); }
 
 .paper .bibtex {
   display: block;
-  background: #fafafa;
+  background: var(--code-bg);
   border: 1px solid var(--rule);
   border-radius: 3px;
   padding: 0.75rem 0.9rem;
@@ -299,7 +324,7 @@ table.teaching th {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  background: #f4f4f4;
+  background: var(--photo-ph);
   transition: opacity 0.15s ease;
 }
 
