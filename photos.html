@@ -52,6 +52,57 @@
     <li><a href="Photos/selected/IMG_6528.JPEG"><img src="Photos/selected/IMG_6528.JPEG" alt="Fieldwork in Ndola District, Zambia" loading="lazy"></a></li>
   </ul>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true" aria-label="Photo viewer">
+    <button type="button" class="close" aria-label="Close">&times;</button>
+    <button type="button" class="prev" aria-label="Previous photo">&lsaquo;</button>
+    <img alt="">
+    <button type="button" class="next" aria-label="Next photo">&rsaquo;</button>
+  </div>
+
+  <script>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.photo-grid a'));
+    if (!links.length) return;
+    var lb = document.getElementById('lightbox');
+    var img = lb.querySelector('img');
+    var i = 0;
+
+    function show(n) {
+      i = (n + links.length) % links.length;
+      img.src = links[i].getAttribute('href');
+      img.alt = links[i].querySelector('img').alt;
+    }
+    function open(n) {
+      show(n);
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    links.forEach(function (a, n) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        open(n);
+      });
+    });
+    lb.querySelector('.close').addEventListener('click', close);
+    lb.querySelector('.prev').addEventListener('click', function (e) { e.stopPropagation(); show(i - 1); });
+    lb.querySelector('.next').addEventListener('click', function (e) { e.stopPropagation(); show(i + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') show(i - 1);
+      else if (e.key === 'ArrowRight') show(i + 1);
+    });
+  })();
+  </script>
+
   <footer class="site">
     &copy; 2026 Mathilde Lesueur
   </footer>
